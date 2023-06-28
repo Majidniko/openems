@@ -5,7 +5,7 @@
 -resolve.effective: active
 
 -runproperties:\
-	org.osgi.service.http.port=8080,\
+	org.osgi.service.http.port=8081,\
 	felix.cm.dir=c:/openems/config,\
 	openems.data.dir=c:/openems/data,\
 	org.apache.felix.eventadmin.Timeout=0,\

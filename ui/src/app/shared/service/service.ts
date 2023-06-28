@@ -90,7 +90,8 @@ export class Service extends AbstractService {
 
   public setLang(language: Language) {
     if (language !== null) {
-      this.translate.use(language.key);
+      //this.translate.use(language.key);
+      this.translate.use('en');
     } else {
       this.translate.use(Language.DEFAULT.key);
     }
