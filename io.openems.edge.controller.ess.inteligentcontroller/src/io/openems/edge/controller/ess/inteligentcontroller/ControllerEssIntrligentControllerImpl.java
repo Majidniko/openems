@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+// import weka.core.converters.CSVLoader;
 
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -26,6 +27,7 @@ import io.openems.edge.common.component.AbstractOpenemsComponent;
 import io.openems.edge.common.component.ComponentManager;
 import io.openems.edge.common.component.OpenemsComponent;
 import io.openems.edge.controller.api.Controller;
+import io.openems.edge.controller.ess.limittotaldischarge.State;
 import io.openems.edge.ess.api.ManagedSymmetricEss;
 import io.openems.edge.ess.power.api.Phase;
 import io.openems.edge.ess.power.api.Pwr;
@@ -48,12 +50,6 @@ public class ControllerEssIntrligentControllerImpl extends AbstractOpenemsCompon
     private ComponentManager componentManager;
 
     private Config config;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private LocalTime slowStartTime;
-    private int slowforceChargeMinutes;
     private ChargeState chargeState = ChargeState.NORMAL;
 
     public ControllerEssIntrligentControllerImpl() {
@@ -96,6 +92,8 @@ public class ControllerEssIntrligentControllerImpl extends AbstractOpenemsCompon
 
 	var power = this.getPower(ess, meter);
 	this.applyPower(ess, power);
+	 this.logWarn(this.log, "ess active power "+ess.getActivePower().toString());
+	 c
     }
 
     /**
@@ -125,7 +123,7 @@ public class ControllerEssIntrligentControllerImpl extends AbstractOpenemsCompon
     private Integer getPower(ManagedSymmetricEss ess, ElectricityMeter meter)
 	    throws OpenemsException, IllegalArgumentException {
 
-	var now = LocalDateTime.now(this.componentManager.getClock());
+
 
 	boolean stateChanged;
 	Integer power = null;
@@ -168,10 +166,17 @@ public class ControllerEssIntrligentControllerImpl extends AbstractOpenemsCompon
 	    return 0;
 	}
 
-	// Calculate 'real' grid-power (without current ESS charge/discharge)
-	var gridPower = meter.getActivePower().getOrError() /* current buy-from/sell-to grid */
-		+ ess.getActivePower().getOrError() /* current charge/discharge ESS */;
 
+	 this.logWarn(this.log, "meter get power "+ meter.getActivePower().toString());
+	 ess._setActiveChargeEnergy(-5000);
+	 this.logWarn(this.log, "ess get power "+ess.getActivePower().toString());
+	 this.logWarn(this.log, "ess get capacity "+ess.getCapacity().toString());
+	 this.logWarn(this.log, "ess get allow chage power "+ess.getActiveChargeEnergy().toString());
+	 this.logWarn(this.log, "ess get soc power "+ess.getSoc().toString());
+	 if(this.isEnabled()==true) {
+		 this.logWarn(log, "is enable");
+		 this.logInfo(log, LocalTime.now().toString());
+	 }
 	int calculatedPower;
 	calculatedPower = 0;
 	this.channel(ControllerEssInteligentController.ChannelId.PEAK_SHAVED_POWER).setNextValue(calculatedPower);

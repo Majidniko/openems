@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>local</groupId>
 	<artifactId>central</artifactId>
@@ -93,7 +95,8 @@
 			<version>1.2.0</version>
 		</dependency>
 		<dependency>
-			<!-- HikariCP A solid, high-performance, JDBC connection pool at last. -->
+			<!-- HikariCP A solid, high-performance, JDBC connection pool at
+			last. -->
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 			<version>5.0.1</version>
@@ -105,16 +108,20 @@
 			<version>1.5</version>
 		</dependency>
 		<dependency>
-			<!-- Apache Commons IO is a library of utilities to assist with developing IO functionality. -->
-			<!-- Changelog: https://commons.apache.org/proper/commons-io/changes-report.html -->
+			<!-- Apache Commons IO is a library of utilities to assist with
+			developing IO functionality. -->
+			<!-- Changelog:
+			https://commons.apache.org/proper/commons-io/changes-report.html -->
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.13.0</version>
 		</dependency>
 		<!-- de -->
 		<dependency>
-			<!-- PgBulkInsert is a Java library for Bulk Inserts to PostgreSQL using the Binary COPY Protocol. -->
-			<!-- Changelog: https://github.com/PgBulkInsert/PgBulkInsert/blob/master/CHANGELOG.md-->
+			<!-- PgBulkInsert is a Java library for Bulk Inserts to PostgreSQL
+			using the Binary COPY Protocol. -->
+			<!-- Changelog:
+			https://github.com/PgBulkInsert/PgBulkInsert/blob/master/CHANGELOG.md-->
 			<groupId>de.bytefish</groupId>
 			<artifactId>pgbulkinsert</artifactId>
 			<version>8.1.0</version>
@@ -177,35 +184,40 @@
 		</dependency>
 		<dependency>
 			<!-- Apache Felix Configuration Admin Service -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/configadmin/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/configadmin/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.configadmin</artifactId>
 			<version>1.9.26</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix EventAdmin -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/eventadmin/impl/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/eventadmin/impl/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.eventadmin</artifactId>
 			<version>1.6.4</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix File Install -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/fileinstall/doc/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/fileinstall/doc/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.fileinstall</artifactId>
 			<version>3.7.4</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix Framework -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/framework/doc/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/framework/doc/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.framework</artifactId>
 			<version>7.0.5</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix HTTP Service -->
-			<!-- Changelog: https://github.com/apache/felix-dev/commits/master/http -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/commits/master/http -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.http.jetty</artifactId>
 			<version>5.0.4</version>
@@ -218,35 +230,41 @@
 		</dependency>
 		<dependency>
 			<!-- Apache Felix Inventory -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/inventory/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/inventory/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.inventory</artifactId>
 			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix Metatype Service -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/metatype/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/metatype/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.metatype</artifactId>
 			<version>1.2.4</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix Service Component Runtime (SCR) -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/scr/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/scr/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.scr</artifactId>
 			<version>2.2.6</version>
 		</dependency>
 		<dependency>
 			<!-- Apache Felix Web Management Console -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/webconsole/changelog.txt -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/webconsole/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.webconsole</artifactId>
 			<version>4.7.2</version>
 		</dependency>
 		<dependency>
-			<!-- Apache Felix Web Console Service Component Runtime/Declarative Services Plugin -->
-			<!-- Changelog: https://github.com/apache/felix-dev/blob/master/webconsole-plugins/ds/changelog.txt -->
+			<!-- Apache Felix Web Console Service Component Runtime/Declarative
+			Services Plugin -->
+			<!-- Changelog:
+			https://github.com/apache/felix-dev/blob/master/webconsole-plugins/ds/changelog.txt -->
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.apache.felix.webconsole.plugins.ds</artifactId>
 			<version>2.2.0</version>
@@ -257,8 +275,10 @@
 			<version>4.13.2_1</version>
 		</dependency>
 		<dependency>
-			<!-- Checker Qual: annotations for type-checking by the Checker Framework -->
-			<!-- Changelog: https://github.com/typetools/checker-framework/blob/master/docs/CHANGELOG.md -->
+			<!-- Checker Qual: annotations for type-checking by the Checker
+			Framework -->
+			<!-- Changelog:
+			https://github.com/typetools/checker-framework/blob/master/docs/CHANGELOG.md -->
 			<groupId>org.checkerframework</groupId>
 			<artifactId>checker-qual</artifactId>
 			<version>3.35.0</version>
@@ -408,5 +428,13 @@
 			<artifactId>rrd4j</artifactId>
 			<version>3.8.2</version>
 		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka/weka-stable -->
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-stable</artifactId>
+			<version>3.8.0</version>
+		</dependency>
+
 	</dependencies>
 </project>

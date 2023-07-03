@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import org.junit.Test;
 
 import io.openems.common.exceptions.OpenemsException;
-import io.openems.edge.controller.ess.inteligentcontroller.ControllerEssIntrligentControllerImpl;
 
 public class TimeParserTest {
 
