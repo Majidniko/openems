@@ -10,6 +10,8 @@ Bundle-Version: 1.0.0.${tstamp}
 	io.openems.edge.controller.api,\
 	io.openems.edge.ess.api,\
 	io.openems.edge.meter.api,\
-
+	nz.ac.waikato.cms.weka.thirdparty:java-cup-11b,\
+	nz.ac.waikato.cms.weka.thirdparty:java-cup-11b-runtime,\
+	nz.ac.waikato.cms.weka:weka-stable
 -testpath: \
 	${testpath}

@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-// import weka.core.converters.CSVLoader;
+import weka.core.converters.CSVLoader;
 
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -27,7 +27,7 @@ import io.openems.edge.common.component.AbstractOpenemsComponent;
 import io.openems.edge.common.component.ComponentManager;
 import io.openems.edge.common.component.OpenemsComponent;
 import io.openems.edge.controller.api.Controller;
-import io.openems.edge.controller.ess.limittotaldischarge.State;
+
 import io.openems.edge.ess.api.ManagedSymmetricEss;
 import io.openems.edge.ess.power.api.Phase;
 import io.openems.edge.ess.power.api.Pwr;
@@ -93,7 +93,7 @@ public class ControllerEssIntrligentControllerImpl extends AbstractOpenemsCompon
 	var power = this.getPower(ess, meter);
 	this.applyPower(ess, power);
 	 this.logWarn(this.log, "ess active power "+ess.getActivePower().toString());
-	 c
+	 
     }
 
     /**
