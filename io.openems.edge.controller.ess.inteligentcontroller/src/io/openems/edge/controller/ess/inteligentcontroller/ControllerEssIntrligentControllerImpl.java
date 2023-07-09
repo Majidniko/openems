@@ -1,18 +1,18 @@
 package io.openems.edge.controller.ess.inteligentcontroller;
 
-import java.io.*;
-import java.util.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import weka.core.converters.CSVLoader;
-import weka.core.converters.ArffSaver;
-import weka.core.Instances;
-
-
+import java.util.ArrayList;
+import java.util.List;
 
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -33,11 +33,14 @@ import io.openems.edge.common.component.AbstractOpenemsComponent;
 import io.openems.edge.common.component.ComponentManager;
 import io.openems.edge.common.component.OpenemsComponent;
 import io.openems.edge.controller.api.Controller;
-
 import io.openems.edge.ess.api.ManagedSymmetricEss;
-import io.openems.edge.ess.power.api.Phase;
-import io.openems.edge.ess.power.api.Pwr;
 import io.openems.edge.meter.api.ElectricityMeter;
+import weka.classifiers.trees.J48;
+import weka.core.Instances;
+import weka.core.SerializationHelper;
+import weka.core.converters.ArffLoader;
+import weka.core.converters.ArffSaver;
+import weka.core.converters.CSVLoader;
 
 @Designate(ocd = Config.class, factory = true)
 @Component(//
@@ -93,15 +96,24 @@ public class ControllerEssIntrligentControllerImpl extends AbstractOpenemsCompon
 
     @Override
     public void run() throws OpenemsNamedException {
+	boolean once=true;
 	ManagedSymmetricEss ess = this.componentManager.getComponent(this.config.ess());
 	ElectricityMeter meter = this.componentManager.getComponent(this.config.meter_id());
-
+if(once) {
 	var power = this.getPower(ess, meter);
+	String attributeName="PV";
 
-	 this.logWarn(this.log, "ess active power "+ess.getActivePower().toString());
-	 csvSplitter("d:", "PV");
-	 String prepad = "Process\\" + "PV";
-	 convert(prepad + "part1.csv");
+	 this.logWarn(this.log, "ess active power " + ess.getActivePower().toString());
+	 this.csvSplitter("p.p", attributeName);
+	 String prepad = "Process\\" + attributeName;
+	 this.convert(prepad + "part1.csv");
+	 this.convert(prepad + "part2.csv");
+	 this.replaceAttribute(prepad + "part2.arff", attributeName, "?");
+	 this.train(prepad + "part1.arff", attributeName);
+	 this.predicting(prepad + "part2.arff", attributeName,"Results\\" + attributeName + "Prediction output.arff");
+	 once=!once;
+}
+	 
     }
 
     /**
@@ -207,8 +219,8 @@ try {
 }
     }
 
-    private void replaceAttribute(String path, String attributeName, String newValue) throws Exception {
-
+    private void replaceAttribute(String path, String attributeName, String newValue)   {
+try {
         // Load dataset
         Instances data = new Instances(new BufferedReader(new FileReader(path)));
 
@@ -237,8 +249,119 @@ try {
         } else {
             this.logWarn(this.log,attributeName + " attribute did not found in file...");
         }
+    }catch(Exception e) {
+	this.logWarn(this.log,e.toString());
     }
+    }
+    private void train(String path, String attributeName) {
+        long startTime = System.nanoTime();
+        try {
+            randomForest(loadArff(path), attributeName);
 
+            timer(startTime);
+        } catch (Exception e) {
+            this.logWarn(this.log,e.toString());
+        }
+    }
+    private Instances loadArff(String path) {
+        // Load dataset from ARFF file
+        ArffLoader loader = new ArffLoader();
+        try {
+            loader.setFile(new File(path));
+            return loader.getDataSet();
+        } catch (IOException e) {
+            this.logWarn(this.log,e.toString());
+            return null;
+        }
+    }
+    private void randomForest(Instances data, String attributeName) {
+        for (int i = 0; i < data.numAttributes(); i++) {
+            if ((data.instance(i).attribute(i).name().compareTo(attributeName) == 0)) {
+                data.setClassIndex(i);
+                try {
+                    // Train J48 decision tree model
+                   J48 randomForest = new J48();
+                    randomForest.buildClassifier(data);
+                    modelSaver(randomForest);
+                } catch (Exception e) {
+                    this.logWarn(this.log,e.toString());
+                }
+            }
+
+        }
+    }
+    private void modelSaver(J48 randomForest) throws FileNotFoundException, Exception {
+        String filename = "my_model.model";
+        SerializationHelper.write(new FileOutputStream(filename), randomForest);
+        this.logInfo(this.log,"Model saved in: " + filename);
+    }
+    public void timer(long startTime) {
+        long endTime = System.nanoTime();
+        long elapsedTime = endTime - startTime;
+        long minutes = (elapsedTime / 1_000_000_000) / 60;
+        long seconds = (elapsedTime / 1_000_000_000) % 60;
+        long milliseconds = (elapsedTime % 1_000_000) / 1_000;
+        String stringTime = (String.format("Elapsed time: %d minutes, %d seconds, %d milliseconds",
+                minutes, seconds, milliseconds));
+        this.logInfo(this.log,stringTime);
+
+    }
+    private void predicting(String path, String attributeName, String outputPath) {
+        long startTime = System.nanoTime();
+        try {
+
+            resultSaver(prediction(loadArff(path), attributeName), outputPath);
+            timer(startTime);
+        } catch (Exception e) {
+            this.logWarn(this.log,e.toString());
+        }
+    }
+    private Instances prediction(Instances predictData, String attributeName) {
+        try {
+            J48 randomForest = new J48();
+            randomForest = modelLoader();
+            for (int i = 0; i < predictData.numAttributes(); i++) {
+                if ((predictData.instance(i).attribute(i).name().compareTo(attributeName) == 0)) {
+                    predictData.setClassIndex(i);
+                    String message1 = "this is index : " + predictData.attribute(i);
+                    this.logWarn(this.log,message1);
+
+                    // Predict the exact attribute value for a given instance
+                    for (int j = 0; j < predictData.numInstances(); j++) {
+                        double prediction = randomForest.classifyInstance(predictData.instance(j));
+                        double timeOfHappen = (predictData.instance(j).value(0));
+                        // String message2 = ("Predicted value for " + attributeName + ": " + prediction
+                        // + " will be in "
+                        // + convertTime(timeOfHappen));
+                        // logger.info(message2);
+                        predictData.instance(j).setValue(predictData.classIndex(), prediction);
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+            this.logWarn(this.log,e.toString());
+        }
+        return predictData;
+    }
+    private J48 modelLoader() throws FileNotFoundException, Exception {
+
+        // Load the saved Weka model from a file
+        String filename = "my_model.model";
+        return (J48) SerializationHelper.read(new FileInputStream(filename));
+    }
+    private void resultSaver(Instances predictData, String outputPath) {
+        try {
+            // Output the updated dataset as CSV
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath));
+            writer.write(predictData.toString());
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
+            this.logWarn(this.log,"Error in writing results to file ! "+ e.toString());
+
+        }
+    }
     /**
      * Gets the current ActivePower.
      *

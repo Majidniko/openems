@@ -12,6 +12,10 @@ Bundle-Version: 1.0.0.${tstamp}
 	io.openems.edge.meter.api,\
 	nz.ac.waikato.cms.weka.thirdparty:java-cup-11b,\
 	nz.ac.waikato.cms.weka.thirdparty:java-cup-11b-runtime,\
-	nz.ac.waikato.cms.weka:weka-stable
+	nz.ac.waikato.cms.weka:scriptingClassifiers,\
+	nz.ac.waikato.cms.weka:kfPMMLClassifierScoring,\
+	nz.ac.waikato.cms.weka:weka-dev,\
+	edankert.com.bounce
 -testpath: \
 	${testpath}
+-runrequires: \
