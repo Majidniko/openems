@@ -1,0 +1,3 @@
+= io.openems.edge.controller.ess.intelligentcontroller
+
+https://github.com/OpenEMS/openems/tree/develop/io.openems.edge.controller.ess.intelligentcontroller[Source Code icon:github[]]
