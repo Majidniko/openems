@@ -1,8 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/io/openems/edge/controller/ess/intelligentcontroller/Config.java=UTF-8
-encoding//src/io/openems/edge/controller/ess/intelligentcontroller/ControllerEssIntelligent.java=UTF-8
-encoding//src/io/openems/edge/controller/ess/intelligentcontroller/ControllerEssIntelligentImpl.java=UTF-8
+encoding//src/io/openems/edge/controller/ess/intelligentcontroller/MyController.java=UTF-8
+encoding//src/io/openems/edge/controller/ess/intelligentcontroller/MyControllerImpl.java=UTF-8
 encoding//test/io/openems/edge/controller/ess/intelligentcontroller/MyConfig.java=UTF-8
 encoding//test/io/openems/edge/controller/ess/intelligentcontroller/MyControllerTest.java=UTF-8
+encoding/<project>=UTF-8
 encoding/bnd.bnd=UTF-8
 encoding/readme.adoc=UTF-8

@@ -1,20 +1,20 @@
-Bundle-Name: OpenEMS Edge Controller Ess Intelligentcontroller
+Bundle-Name: OpenEMS Edge Controller io.openems.edge.controller.ess.intelligentcontroller
 Bundle-Vendor: OpenEMS Association e.V.
 Bundle-License: https://opensource.org/licenses/EPL-2.0
 Bundle-Version: 1.0.0.${tstamp}
+
+-includeresource: \
+	@lib/weka-dev-3.9.6.jar; lib:=true
 
 -buildpath: \
 	${buildpath},\
 	io.openems.common,\
 	io.openems.edge.common,\
 	io.openems.edge.controller.api,\
-	io.openems.edge.ess.api,\
-	io.openems.edge.meter.api,\
-	nz.ac.waikato.cms.weka.thirdparty:java-cup-11b,\
-	nz.ac.waikato.cms.weka.thirdparty:java-cup-11b-runtime,\
-	nz.ac.waikato.cms.weka:scriptingClassifiers,\
-	nz.ac.waikato.cms.weka:kfPMMLClassifierScoring,\
-	nz.ac.waikato.cms.weka:weka-dev,\
-	edankert.com.bounce
+	lib/weka-dev-3.9.6.jar;version=file,\
+	lib/java-cup-11b-2015.03.26.jar;version=file,\
+	lib/java-cup-11b-runtime-2015.03.26.jar;version=file,\
+	lib/bounce-0.18.jar;version=file
+
 -testpath: \
 	${testpath}

@@ -2,6 +2,7 @@ package io.openems.edge.controller.ess.intelligentcontroller;
 
 import io.openems.common.test.AbstractComponentConfig;
 
+
 @SuppressWarnings("all")
 public class MyConfig extends AbstractComponentConfig implements Config {
 
@@ -15,18 +16,22 @@ public class MyConfig extends AbstractComponentConfig implements Config {
 
 		public Builder setId(String id) {
 			this.id = id;
+			
 			return this;
 		}
 
-		public Builder setEssId(String essId) {
-			this.essId = essId;
+		public Builder setessId(String essId) {
+			this.id = id;
+			
+			return this;
+		}
+		
+		public Builder setmeterId(String meterId) {
+			this.id = id;
+			
 			return this;
 		}
 
-		public Builder setMeterId(String meterId) {
-			this.meterId = meterId;
-			return this;
-		}
 
 		public MyConfig build() {
 			return new MyConfig(this);

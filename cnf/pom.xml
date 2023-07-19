@@ -428,44 +428,7 @@
 			<artifactId>rrd4j</artifactId>
 			<version>3.8.2</version>
 		</dependency>
-		<!--
-		https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka/weka-stable -->
-		<!--
-		https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka.thirdparty/java-cup-11b -->
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
-			<artifactId>java-cup-11b</artifactId>
-			<version>2015.03.26</version>
-		</dependency>
-		<!--
-		https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka.thirdparty/java-cup-11b-runtime -->
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
-			<artifactId>java-cup-11b-runtime</artifactId>
-			<version>2015.03.26</version>
-		</dependency>
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka</groupId>
-			<artifactId>scriptingClassifiers</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka</groupId>
-			<artifactId>kfPMMLClassifierScoring</artifactId>
-			<version>1.0.3</version>
-		</dependency>
-		<!--
-		https://mvnrepository.com/artifact/nz.ac.waikato.cms.weka.thirdparty/bounce -->
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
-			<artifactId>bounce</artifactId>
-			<version>0.18</version>
-		</dependency>
-		<dependency>
-			<groupId>nz.ac.waikato.cms.weka</groupId>
-			<artifactId>weka-dev</artifactId>
-			<version>3.9.6</version>
-		</dependency>
+
 
 	</dependencies>
 </project>
